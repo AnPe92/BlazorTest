@@ -1,0 +1,18 @@
+﻿@page "/movie"
+@using MovieList.Client.Services.Interfaces
+@using MovieList.Library.Models
+@inject IMovieService service
+
+
+
+<h3>Movie</h3>
+<h1>ASD</h1>
+
+@code {
+    private IEnumerable<MovieItem> movies; 
+
+    public string MovieName { get; set; }
+    public bool MovieWatched { get; set; }
+    public string MovieDescription { get; set; }
+
+}

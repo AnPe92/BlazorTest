@@ -1,0 +1,49 @@
+﻿@page "/chat"
+@rendermode InteractiveAuto
+
+<h3>Chat</h3>
+@if (string.IsNullOrEmpty(_nickname))
+{
+    <input placeholder="Enter a nickname" @bind="Nickname" >
+    <button @onclick="test">click</button>
+}
+else
+{
+    <h1>Welcome @_nickname</h1>   
+    <h3>Chat</h3>
+    <p>Enter a message:</p>
+    <input placeholder="" @bind="userMessage" name="userMessage"/>
+    <button @onclick="AddMessage">Send message</button>
+    <div>
+        @if(_messages.Count > 0)
+            @foreach(var msg in _messages)
+            {
+                <p>@msg.Item1 : @msg.Item2</p>
+            }
+    </div>
+}
+@code {
+    private string userMessage;
+    private string _nickname;
+    private List<(string, string)> _messages = new List<(string, string)>();
+    public List<(string, string)> Messages
+    {
+        get => _messages;
+    }
+    public string Nickname 
+    {
+        get => _nickname;
+        set { _nickname = value; } 
+    }
+
+    private void AddMessage()
+    {
+        if(!string.IsNullOrEmpty(userMessage))
+            Messages.Add((_nickname,userMessage));
+    }
+
+    private void test()
+    {
+        Console.WriteLine("---------->" + _nickname);
+    }
+}
